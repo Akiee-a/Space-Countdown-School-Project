@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Countdown Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div id="login" class="login-screen">
+        <h2>🚀 Space Mission Countdown</h2>
+        <input type="text" id="mission" placeholder="Mission Name">
+        <input type="text" id="commander" placeholder="Commander Name">
+            <button onclick="enter()">Enter</button>
+        <p id="error" class="error">Please fill all fields</p>
+    </div>
+
+    <div id="dashboard">
+        <h3 id="welcome"></h3>
+
+        <button onclick="redAlert()">🚨 Red Alert</button>
+
+        <p id="clock" style="display:none;"></p>
+
+        <div id="timer">01:00:00</div>
+
+        <button onclick="start()">Start</button>
+        <button onclick="abort()">Abort</button>
+        <button onclick="reset()">Reset</button>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html> 

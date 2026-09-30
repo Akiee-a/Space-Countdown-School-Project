@@ -1,0 +1,188 @@
+body {
+            font-family: Arial;
+            background-color: #0f172a;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: 0.3s;
+        }
+
+        /* ONLY LOGIN BACKGROUND EFFECT */
+        .login-screen::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, #38bdf8, transparent),
+                radial-gradient(2px 2px at 40px 70px, #38bdf8, transparent),
+                radial-gradient(1.5px 1.5px at 90px 40px, #38bdf8, transparent),
+                radial-gradient(1.5px 1.5px at 130px 80px, #38bdf8, transparent),
+                radial-gradient(2px 2px at 160px 30px, #38bdf8, transparent),
+                radial-gradient(1px 1px at 200px 90px, #38bdf8, transparent),
+                radial-gradient(2px 2px at 250px 50px, #38bdf8, transparent);
+
+            background-repeat: repeat;
+            background-size: 300px 200px;
+
+            animation: starsMove 20s linear infinite;
+            opacity: 0.6;
+
+            z-index: -1;
+        }
+
+        @keyframes starsMove {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-200px); }
+        }
+
+        .container {
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        input, button {
+            width: 90%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input {
+            background: #334155;
+            color: white;
+        }
+
+        button {
+            background: #3b82f6;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2563eb;
+        }
+
+        .error {
+            color: red;
+            display: none;
+            font-size: 14px;
+        }
+
+        #dashboard {
+            display: none;
+        }
+
+        #timer {
+            font-size: 40px;
+            margin: 15px 0;
+            color: #38bdf8;
+            text-shadow: 0 0 5px #38bdf8,
+                        0 0 10px #38bdf8,
+                        0 0 20px #0ea5e9;
+            transition: 0.3s;
+        }
+
+        #clock {
+            font-size: 30px;
+            opacity: 0.8;
+            border: solid 2px #3b82f6;
+            padding: 10px;
+            border-radius: 20px;
+        }
+
+        .alert {
+            background-color: #2b0000;
+            color: #ff4d4d;
+        }
+
+        .alert #clock {
+            border-color: #ff1a1a;
+        }
+
+        .alert .container {
+            background: #3b0a0a;
+        }
+
+        .alert input {
+            background: #4a1a1a;
+            color: #ffcccc;
+        }
+
+        .alert button {
+            background: #b91c1c;
+        }
+
+        .alert button:hover {
+            background: #7f1d1d;
+        }
+
+        .alert #timer {
+            color: #ff4d4d;
+            text-shadow: 0 0 5px #ff4d4d,
+                        0 0 10px #ff1a1a,
+                        0 0 20px #b30000;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .launch-blink {
+            animation: blink 0.5s infinite;
+            font-size: 45px;
+            color: #ff4d4d;
+            text-shadow: 0 0 10px red, 0 0 20px darkred;
+        }
+
+        @keyframes bgBlink {
+            0% { background-color: #2b0000; }
+            50% { background-color: #ff0000; }
+            100% { background-color: #2b0000; }
+        }
+
+        .launch-bg-blink {
+            animation: bgBlink 0.5s infinite;
+        }
+
+        .launch .container {
+            background: #2b0000;
+            border: 2px solid #ff1a1a;
+        }
+
+        .launch input {
+            background: #4a1a1a;
+            color: #ffcccc;
+        }
+
+        .launch button {
+            background: #b91c1c;
+        }
+
+        .launch button:hover {
+            background: #7f1d1d;
+        }
+
+        .launch #clock {
+            border-color: #ff1a1a;
+        }
+
+        .launch #timer {
+            color: #ff1a1a !important;
+            text-shadow:0 0 10px red,
+                0 0 20px darkred,
+                0 0 30px black;
+}

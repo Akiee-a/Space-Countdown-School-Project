@@ -1,0 +1,83 @@
+// --- Student Selectors: Dito ko kinuha yung mga elements from HTML ---
+const loginView = document.getElementById('auth-panel');
+const dashView = document.getElementById('focus-dashboard');
+const entryForm = document.getElementById('study-login-form');
+const errorDisplay = document.getElementById('error-alert'); // Para sa error message later
+const greetingArea = document.getElementById('personalized-greeting');
+const modeCheckbox = document.getElementById('theme-checkbox'); // Switch para sa dark mode
+
+// Dito iche-check kung valid yung input sa form
+entryForm.addEventListener('submit', function(e) {
+    e.preventDefault(); // Stop muna yung refresh para hindi mawala yung data
+    
+    const nameInput = document.getElementById('full-name-field').value;
+    const emailInput = document.getElementById('email-field').value;
+
+    // Dapat hindi empty yung name at dapat may '@' yung email check
+    if (nameInput.trim() === "" || !emailInput.includes('@')) {
+        // Kapag sablay, lalabas yung red dynamic error sa ilalim ng button
+        errorDisplay.textContent = "Error: Please check your name and email!";
+    } else {
+        // Kapag okay na, i-clear yung error tapos switch na sa dashboard view
+        errorDisplay.textContent = ""; 
+        loginView.classList.add('hidden'); // Hide yung login card
+        dashView.classList.remove('hidden'); // Show yung study dashboard
+        
+        // Ginamit ko yung name na in-input ni user para sa custom greeting
+        greetingArea.textContent = "Welcome to your focus session, " + nameInput + "!";
+    }
+});
+
+// Para sa theme switching at real-time clock update
+modeCheckbox.addEventListener('change', function() {
+    // Toggle lang yung 'dark-mode' class sa body para mag-change yung colors ng buong site
+    document.body.classList.toggle('dark-mode');
+});
+
+// Gumamit ako ng setInterval para mag-update yung clock every 1 second or 1000ms
+setInterval(function() {
+    const timeNow = new Date();
+    document.getElementById('live-clock').textContent = timeNow.toLocaleTimeString();
+}, 1000);
+
+// Dito naman yung logic ng asynchronous stopwatch timer
+let studyClockID; // Dito ko i-store yung interval reference para ma-clear later
+let msElapsed = 0; // Dito naka-save yung total time in milliseconds
+
+const watchDigits = document.getElementById('stopwatch-digits');
+const btnStart = document.getElementById('start-btn');
+const btnPause = document.getElementById('pause-btn');
+const btnReset = document.getElementById('reset-btn');
+
+// Function para sa pag-compute at pag-format ng timer display
+function runTheWatch() {
+    msElapsed += 10;
+    let d = new Date(msElapsed);
+    let mm = String(d.getUTCMinutes()).padStart(2, '0');
+    let ss = String(d.getUTCSeconds()).padStart(2, '0');
+    let ms = String(Math.floor(d.getUTCMilliseconds() / 10)).padStart(2, '0');
+    
+    // Update yung display sa screen using the formatted strings
+    watchDigits.textContent = mm + ":" + ss + ":" + ms;
+}
+
+btnStart.addEventListener('click', function() {
+    //Para hindi mag-overlap yung interval kapag pinindot ulit yung Start button
+    if (!studyClockID) {
+        studyClockID = setInterval(runTheWatch, 10);
+    }
+});
+
+btnPause.addEventListener('click', function() {
+    // Ititigil yung timer tapos i-null yung reference para pwede i-start ulit nang maayos
+    clearInterval(studyClockID);
+    studyClockID = null;
+});
+
+btnReset.addEventListener('click', function() {
+    // Stop lahat tapos balik sa zero lahat ng values para fresh start
+    clearInterval(studyClockID);
+    studyClockID = null;
+    msElapsed = 0;
+    watchDigits.textContent = "00:00:00";
+});
